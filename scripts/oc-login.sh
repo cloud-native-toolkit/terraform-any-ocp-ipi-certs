@@ -25,7 +25,7 @@ if ! command -v oc 1> /dev/null 2> /dev/null; then
   exit 1
 fi
 
-export KUBE_CONFIG=$(echo "${INPUT}" | jq -r '.config_file_path')
+export KUBECONFIG=$(echo "${INPUT}" | jq -r '.config_file_path')
 
 SERVER=$(oc whoami --show-server | sed -e 's|^[^/]*//||' -e 's|/.*$||' -e 's|:.*$||')
 echo "{\"status\": \"success\", \"message\": \"success\", \"server\": \"${SERVER}\"}"

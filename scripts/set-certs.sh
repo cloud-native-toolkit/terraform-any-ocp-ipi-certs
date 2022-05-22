@@ -26,7 +26,7 @@ if ! command -v oc 1> /dev/null 2> /dev/null; then
 fi
 
 
-export KUBE_CONFIG=$(echo "${INPUT}" | jq -r '.config_file_path')
+export KUBECONFIG=$(echo "${INPUT}" | jq -r '.config_file_path')
 APPS_ISSUER_CA=$(echo "${INPUT}" | jq -r '.apps_issuer_ca_file')
 APPS_CERT=$(echo "${INPUT}" | jq -r '.apps_cert_file')
 APPS_KEY=$(echo "${INPUT}" | jq -r '.apps_key_file')
@@ -73,5 +73,7 @@ oc create secret tls api-server-tls \
 oc patch apiserver cluster \
     --type=merge -p \
     "{\"spec\":{\"servingCerts\": {\"namedCertificates\":
-    [{\"names\": ["${API_FQDN}"], 
+    [{\"names\": [\"${API_FQDN}\"], 
     \"servingCertificate\": {\"name\": \"api-server-tls\"}}]}}}"
+
+echo "{\"status\": \"success\"}"

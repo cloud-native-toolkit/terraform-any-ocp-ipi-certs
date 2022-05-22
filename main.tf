@@ -39,7 +39,7 @@ data external "oc_login" {
   }
 }
 
-data external "oc_login" {
+data external "set_certs" {
   depends_on = [
     local_file.apps_issuer_ca,
     local_file.apps_cert,
