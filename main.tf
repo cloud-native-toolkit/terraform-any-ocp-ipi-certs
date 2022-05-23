@@ -1,9 +1,14 @@
+# provider "kubernetes" {
+#   config_path    = "~/.kube/config"
+# }
+
 locals {
-  apps_issuer_ca_file = "${path.module}/apps-issuer-ca.crt"
-  apps_cert_file = "${path.module}/apps-cert.crt"
-  apps_key_file = "${path.module}/apps-cert.key"
-  api_cert_file = "${path.module}/api-cert.crt"
-  api_key_file = "${path.module}/api-cert.key"
+  certs = "${path.cwd}/${var.cert_dir}"
+  apps_issuer_ca_file = "${local.certs}/apps-issuer-ca.crt"
+  apps_cert_file = "${local.certs}/apps-cert.crt"
+  apps_key_file = "${local.certs}/apps-cert.key"
+  api_cert_file = "${local.certs}/api-cert.crt"
+  api_key_file = "${local.certs}/api-cert.key"
 }
 
 resource local_file apps_issuer_ca {

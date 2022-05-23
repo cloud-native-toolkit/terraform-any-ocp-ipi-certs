@@ -1,3 +1,9 @@
+variable "cert_dir" {
+  type        = string
+  description = "Certificate directory"
+  default     = "certs"
+}
+
 variable "apps_cert" {
   type        = string
   description = "Default ingress certificate"

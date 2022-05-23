@@ -1,9 +1,10 @@
 name: ocp-ipi-certs
 type: terraform
-description: 'Module to provision ocp-ipi-certs on '
+description: Module to replace OpenShift default Ingress & API server certificates
 tags:
-  - tools
-  - devops
+  - certificate
+  - tls
+  - utils
 versions:
   - platforms: []
     dependencies: []
