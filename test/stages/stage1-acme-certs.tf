@@ -1,5 +1,5 @@
 module "acme-cert-apps" {
-  source = "https://github.com/cloud-native-toolkit/terraform-azure-acme-certificate.git"
+  source = "github.com/cloud-native-toolkit/terraform-azure-acme-certificate.git"
 
   domain = "apps.ipi-certs-test.clusters.azure.ibm-software-everywhere.dev"
   wildcard_domain = true
@@ -14,7 +14,7 @@ module "acme-cert-apps" {
 }
 
 module "acme-cert-api" {
-  source = "https://github.com/cloud-native-toolkit/terraform-azure-acme-certificate.git"
+  source = "github.com/cloud-native-toolkit/terraform-azure-acme-certificate.git"
 
   domain = "api.ipi-certs-test.clusters.azure.ibm-software-everywhere.dev"
   wildcard_domain = false
