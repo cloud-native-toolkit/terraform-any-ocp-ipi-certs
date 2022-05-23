@@ -1,8 +1,42 @@
 name: ocp-ipi-certs
 type: terraform
-description: 'Module to provision ocp-ipi-certs on '
+description: Module to replace OpenShift default Ingress & API server certificates
 tags:
-  - tools
-  - devops
-versions: []
+  - certificate
+  - tls
+  - utils
+versions:
+  - platforms: []
+    dependencies: []
+    variables:
+      - name: cert_dir
+        type: string
+        description: Certificate directory
+        default: certs
+      - name: apps_cert
+        type: string
+        description: Default ingress certificate
+      - name: apps_key
+        type: string
+        description: Default ingress certificate key
+      - name: apps_issuer_ca
+        type: string
+        description: Default ingress certificate issuer CA
+      - name: api_cert
+        type: string
+        description: API Server certificate
+      - name: api_key
+        type: string
+        description: API Server certificate key
+      - name: api_issuer_ca
+        type: string
+        description: API Server certificate issuer CA
+      - name: bin_dir
+        type: string
+        description: Path to directory where binaries can be found.
+      - name: config_file_path
+        type: string
+        description: Path to kube config.
+    version: v1.0.0
+    outputs: []
 id: github.com/cloud-native-toolkit/terraform-any-ocp-ipi-certs
