@@ -41,24 +41,24 @@ API_FQDN=$(echo "${INPUT}" | jq -r '.api_fqdn')
 # Create a config map that includes only the root CA certificate used to sign the wildcard certificate
 oc create configmap custom-ca \
     --from-file=ca-bundle.crt=$APPS_ISSUER_CA \
-    -n openshift-config
+    -n openshift-config 1> /dev/null 2> /dev/null
 
 # Update the cluster-wide proxy configuration with the newly created config map
 oc patch proxy/cluster \
     --type=merge \
-    --patch='{"spec":{"trustedCA":{"name":"custom-ca"}}}'
+    --patch='{"spec":{"trustedCA":{"name":"custom-ca"}}}' 1> /dev/null 2> /dev/null
 
 # Create a secret that contains the wildcard certificate chain and key
 oc create secret tls default-ingress-tls \
     --cert=$APPS_CERT \
     --key=$APPS_KEY \
-    -n openshift-ingress
+    -n openshift-ingress 1> /dev/null 2> /dev/null
 
 # Update the Ingress Controller configuration with the newly created secret
 oc patch ingresscontroller.operator default \
     --type=merge -p \
     '{"spec":{"defaultCertificate": {"name": "default-ingress-tls"}}}' \
-    -n openshift-ingress-operator
+    -n openshift-ingress-operator 1> /dev/null 2> /dev/null
 
 # Step 2
 # Replace API server certificate. Docs: https://docs.openshift.com/container-platform/4.9/security/certificates/api-server.html
@@ -67,13 +67,13 @@ oc patch ingresscontroller.operator default \
 oc create secret tls api-server-tls \
     --cert=$API_CERT \
     --key=$API_KEY \
-    -n openshift-config
+    -n openshift-config 1> /dev/null 2> /dev/null
 
 # Update the API server to reference the created secret
 oc patch apiserver cluster \
     --type=merge -p \
     "{\"spec\":{\"servingCerts\": {\"namedCertificates\":
     [{\"names\": [\"${API_FQDN}\"], 
-    \"servingCertificate\": {\"name\": \"api-server-tls\"}}]}}}"
+    \"servingCertificate\": {\"name\": \"api-server-tls\"}}]}}}" 1> /dev/null 2> /dev/null
 
 echo "{\"status\": \"success\"}"
