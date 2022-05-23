@@ -1,5 +1,5 @@
 module "ocp-ipi" {
-  source = "https://github.com/cloud-native-toolkit/terraform-azure-ocp-ipi"
+  source = "https://github.com/cloud-native-toolkit/terraform-azure-ocp-ipi.git"
 
   name_prefix                 = "ipi-certs-test"
   domain_resource_group_name  = "ocp-ipi-rg"
