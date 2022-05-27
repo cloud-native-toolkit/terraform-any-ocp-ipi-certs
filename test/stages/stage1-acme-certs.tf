@@ -6,6 +6,8 @@ module "acme-cert-apps" {
 
   acme_registration_email = "noe.samaille@ibm.com"
 
+  acme_api_endpoint = "https://acme-staging-v02.api.letsencrypt.org/directory"
+
   resource_group_name = "ocp-ipi-rg"
   subscription_id     = var.subscription_id
   tenant_id           = var.tenant_id
@@ -20,6 +22,8 @@ module "acme-cert-api" {
   wildcard_domain = false
 
   acme_registration_email = "noe.samaille@ibm.com"
+
+  acme_api_endpoint = "https://acme-staging-v02.api.letsencrypt.org/directory"
 
   resource_group_name = "ocp-ipi-rg"
   subscription_id     = var.subscription_id
