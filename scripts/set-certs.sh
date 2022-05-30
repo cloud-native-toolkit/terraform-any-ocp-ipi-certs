@@ -41,3 +41,4 @@ ${BIN_DIR}/oc patch apiserver cluster \
     [{\"names\": [\"${API_FQDN}\"], 
     \"servingCertificate\": {\"name\": \"api-server-tls\"}}]}}}" 1> /dev/null 2> /dev/null
 
+echo "Successfully applied certificates to cluster"
