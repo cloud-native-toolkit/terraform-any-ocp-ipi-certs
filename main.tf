@@ -44,7 +44,7 @@ data external "oc_login" {
   }
 }
 
-data external "set_certs" {
+resource "null_resource" "set_certs" {
   depends_on = [
     local_file.apps_issuer_ca,
     local_file.apps_cert,
@@ -52,16 +52,20 @@ data external "set_certs" {
     local_file.api_cert,
     local_file.api_key,
   ]
-  program = ["bash", "${path.module}/scripts/set-certs.sh"]
 
-  query = {
-    bin_dir = var.bin_dir
-    config_file_path = var.config_file_path
-    apps_issuer_ca_file = local.apps_issuer_ca_file
-    apps_cert_file = local.apps_cert_file
-    apps_key_file = local.apps_key_file
-    api_cert_file = local.api_cert_file
-    api_key_file = local.api_key_file
-    api_fqdn = data.external.oc_login.result.server
+  provisioner "local-exec" {
+    when = create
+    command = "${path.module}/scripts/set-certs.sh"
+
+    environment = {
+      BIN_DIR = var.bin_dir
+      CONFIG_FILE_PATH = var.config_file_path
+      APPS_ISSUER_CA = local.apps_issuer_ca_file
+      APPS_CERT = local.apps_cert_file
+      APPS_KEY = local.apps_key_file
+      API_CERT = local.api_cert_file
+      API_KEY = local.api_key_file
+      API_FQDN = data.external.oc_login.result.server      
+    }   
   }
 }
