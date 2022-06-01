@@ -59,7 +59,7 @@ resource "null_resource" "set_certs" {
 
     environment = {
       BIN_DIR = var.bin_dir
-      CONFIG_FILE_PATH = var.config_file_path
+      KUBECONFIG = var.config_file_path
       APPS_ISSUER_CA = local.apps_issuer_ca_file
       APPS_CERT = local.apps_cert_file
       APPS_KEY = local.apps_key_file
