@@ -43,3 +43,39 @@ variable "config_file_path" {
   type        = string
   description = "Path to kube config."
 }
+
+variable "byo_apps_issuer_ca_file" {
+  type        = string
+  description = "Filename of existing Apps Issuer CA (default \"\")"
+  default     = ""
+}
+
+variable "byo_apps_cert_file" {
+  type        = string
+  description = "Filename of existing Apps Cert (default \"\")"
+  default     = ""
+}
+
+variable "byo_apps_key_file" {
+  type        = string
+  description = "Filename of existing Apps Key (default \"\")"
+  default     = ""
+}
+
+variable "byo_api_cert_file" {
+  type        = string
+  description = "Filename of existing API Cert (default \"\")"
+  default     = ""
+}
+
+variable "byo_api_issuer_ca_file" {
+  type        = string
+  description = "Filename of existing API Issuer CA (default \"\")"
+  default     = ""
+}
+
+variable "byo_api_key_file" {
+  type        = string
+  description = "Filename of existing API Key (default \"\")"
+  default     = ""
+}
