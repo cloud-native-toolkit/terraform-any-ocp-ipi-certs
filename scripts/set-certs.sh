@@ -3,6 +3,15 @@
 # Step 1
 # Replace default ingress certificate. Docs: https://docs.openshift.com/container-platform/4.9/security/certificates/replacing-default-ingress-certificate.html
 
+### DEBUG
+echo "Apps_Issuer_CA = ${APPS_ISSUER_CA}"
+echo "APPS_CERT = ${APPS_CERT}"
+echo "APPS KEY = ${APPS_KEY}"
+echo "API_CERT = ${API_CERT}"
+echo "API_KEY = ${API_KEY}"
+
+###
+
 # Create a config map that includes only the root CA certificate used to sign the wildcard certificate
 ${BIN_DIR}/oc create configmap custom-ca \
     --from-file=ca-bundle.crt=${APPS_ISSUER_CA} \
