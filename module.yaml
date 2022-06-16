@@ -5,7 +5,53 @@ tags:
   - certificate
   - tls
   - utils
+  - ocp
 versions:
-  - platforms: []
-    dependencies: []
-    variables: []
+  - platforms:
+      - ocp4
+    dependencies:
+      - id: acme-api-certificate
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-azure-acme-certificate
+            version: ">=v1.0.0"
+        optional: true
+      - id: acme-apps-certificate
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-azure-acme-certificate
+            version: ">=v1.0.0"
+        optional: true
+    variables: 
+      - name: apps_cert
+        moduleRef: 
+          id: acme-apps-certificate
+          output: cert
+        optional: true
+      - name: apps_key
+        moduleRef: 
+          id: acme-apps-certificate
+          output: key
+        optional: true
+      - name: apps_issuer_ca
+        moduleRef:
+          id: acme-apps-certificate
+          output: issuer_ca
+        optional: true
+      - name: api_cert
+        moduleRef:
+          id: acme-api-certificate
+          output: cert
+        optional: true
+      - name: api_key
+        moduleRef:
+          id: acme-api-certificate
+          output: key
+        optional: true
+      - name: api_issuer_ca
+        moduleRef: 
+          id: acme-api-certificate
+          output: issuer_ca
+        optional: true
+      - name: bin_dir
+        scope: global
+      - name: config_file_path
+        scope: global
